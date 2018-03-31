@@ -75,8 +75,8 @@ public class Events : MonoBehaviour {
 		attackZone.SetActive (false);
 		doveAnimator.SetBool ("attacking", false);
 		GameObject.Find ("DoveBoss").GetComponent<Dove> ().phase = 0;
-		if (timeBetweenFly >= 0.5f) {
-			timeBetweenFly -= 0.5f;
+		if (timeBetweenFly > 1.5f) {
+			timeBetweenFly -= 0.3f;
 		}
 		Invoke ("Fly", timeBetweenFly);
 	}
@@ -132,7 +132,7 @@ public class Events : MonoBehaviour {
 
 		chance = Random.Range (0, 100);
 		Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
-		if (chance < 50) {
+		if (chance <= 60) {
 			GameObject mealObject = Instantiate (mealPrefab);
 			mealObject.transform.position = position;
 		} else {

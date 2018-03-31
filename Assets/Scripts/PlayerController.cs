@@ -75,35 +75,42 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Damage (int damage, bool resistable) {
-		if (resistable && resistCharges > 0 && damage > 0) {
-			resistCharges--;
-		} else {
-			health -= damage;
-		}
-
-		if (health <= 50) {
-			if (breadType == EnumBreadType.INFECTED) {
-				breadType = EnumBreadType.EATED_INFECTED;
+		if (damage > 0) {
+			if (resistable && resistCharges > 0) {
+				resistCharges--;
 			} else {
-				breadType = EnumBreadType.EATED;
+				health -= damage;
 			}
-		} 
-		if (health <= 0f) {
-			gameOverPanel.SetActive (true);
-			Destroy (gameObject);
-			Destroy (GameObject.Find ("ScoreText"));
+
+			if (health <= 50) {
+				if (breadType == EnumBreadType.INFECTED) {
+					breadType = EnumBreadType.EATED_INFECTED;
+				} else {
+					breadType = EnumBreadType.EATED;
+				}
+			} 
+			if (health <= 0f) {
+				gameOverPanel.SetActive (true);
+				Destroy (gameObject);
+				Destroy (GameObject.Find ("HealthPanel"));
+				Destroy (GameObject.Find ("TimePanel"));
+
+			}
 		}
 		healthText.text = "Health: " + health + "%";
+		Camera.main.GetComponent<CameraShake> ().shakeDuration = 0.4f;
 	}
 
 	public void Infect () {
-		if (breadType == EnumBreadType.EATED) {
-			breadType = EnumBreadType.EATED_INFECTED;
-		} else {
-			breadType = EnumBreadType.INFECTED;
+		if (breadType != EnumBreadType.INFECTED || breadType != EnumBreadType.EATED_INFECTED) {
+			if (breadType == EnumBreadType.EATED) {
+				breadType = EnumBreadType.EATED_INFECTED;
+			} else {
+				breadType = EnumBreadType.INFECTED;
+			}
+			speed = 7f;
+			Invoke ("Pure", 16f);
 		}
-		speed -= 2f;
-		Invoke ("Pure", 15f);
 	}
 
 	void Pure () {

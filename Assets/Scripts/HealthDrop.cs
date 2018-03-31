@@ -23,9 +23,9 @@ public class HealthDrop : MonoBehaviour {
 				} else {
 					playerController.health += health;
 				}
-				Destroy (gameObject);
 				playerController.Damage (0, false);
 			}
+			Destroy (gameObject);
 		}
 	}
 }
