@@ -44,14 +44,4 @@ public class Dove : MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
-
-	enum EnumDoveStatus {
-		NEUTRAL,
-		AGRESSIVE,
-		RAGE,
-		TIRED,
-		SAD,
-		HUNGRY,
-		INFECTED
-	}
 }

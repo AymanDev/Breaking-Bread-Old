@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private Text healthText;
 	public EnumBreadType breadType = EnumBreadType.NORMAL;
+	private bool infected = false;
+
+	public GameObject defaultBread;
+	public GameObject infectedBread;
 
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D> ();
@@ -30,12 +34,6 @@ public class PlayerController : MonoBehaviour {
 			animator.SetBool ("walking", true);
 		} else if (animator.GetBool ("walking")) {
 			animator.SetBool ("walking", false);
-		}
-
-		if (health <= 50) {
-			breadType = EnumBreadType.EATED;
-		} else {
-			breadType = EnumBreadType.NORMAL;
 		}
 	}
 
@@ -63,10 +61,32 @@ public class PlayerController : MonoBehaviour {
 
 	public void Damage (int damage) {
 		health -= damage;
-		healthText.text = "Health: " + health + "%";
+		if (health <= 50) {
+			if (breadType == EnumBreadType.EATED) {
+				breadType = EnumBreadType.EATED_INFECTED;
+			} else {
+				breadType = EnumBreadType.EATED;
+			}
+		} 
 	}
 
-	public enum EnumBreadType{
+	public void Infect () {
+		if (breadType == EnumBreadType.EATED) {
+			breadType = EnumBreadType.EATED_INFECTED;
+		} else {
+			breadType = EnumBreadType.INFECTED;
+		}
+		Invoke ("Pure", 30f);
+	}
+
+	void Pure () {
+		if (breadType == EnumBreadType.EATED_INFECTED) {
+			breadType = EnumBreadType.EATED;
+		}
+		breadType = EnumBreadType.NORMAL;
+	}
+
+	public enum EnumBreadType {
 		NORMAL,
 		EATED,
 		INFECTED,
