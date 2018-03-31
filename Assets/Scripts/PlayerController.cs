@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject gameOverPanel;
 
+	public int resistCharges = 0;
+	[SerializeField]
+	private GameObject helmetObjectArmor;
+
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D> ();
 	}
@@ -37,11 +41,15 @@ public class PlayerController : MonoBehaviour {
 			vertical *= -1;
 		}
 
+		helmetObjectArmor.SetActive (resistCharges > 0);
+
 		if (vertical != 0f || horizontal != 0f) {
 			Move ();
 			animator.SetBool ("walking", true);
+			transform.FindChild ("Particle System").gameObject.SetActive (true);
 		} else if (animator.GetBool ("walking")) {
 			animator.SetBool ("walking", false);
+			transform.FindChild ("Particle System").gameObject.SetActive (false);
 		}
 	}
 
@@ -51,7 +59,6 @@ public class PlayerController : MonoBehaviour {
 		force.x += horizontal * Time.deltaTime * speed;
 		force.y += vertical * Time.deltaTime * speed;
 		rigidBody.MovePosition (force);
-
 		if (horizontal > 0f && !right) {
 			Flip ();
 			right = true;
@@ -67,10 +74,15 @@ public class PlayerController : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	public void Damage (int damage) {
-		health -= damage;
+	public void Damage (int damage, bool resistable) {
+		if (resistable && resistCharges > 0 && damage > 0) {
+			resistCharges--;
+		} else {
+			health -= damage;
+		}
+
 		if (health <= 50) {
-			if (breadType == EnumBreadType.EATED) {
+			if (breadType == EnumBreadType.INFECTED) {
 				breadType = EnumBreadType.EATED_INFECTED;
 			} else {
 				breadType = EnumBreadType.EATED;
@@ -80,7 +92,6 @@ public class PlayerController : MonoBehaviour {
 			gameOverPanel.SetActive (true);
 			Destroy (gameObject);
 			Destroy (GameObject.Find ("ScoreText"));
-			//Time.timeScale = 0;
 		}
 		healthText.text = "Health: " + health + "%";
 	}

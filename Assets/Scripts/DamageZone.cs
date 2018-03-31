@@ -7,6 +7,7 @@ public class DamageZone : MonoBehaviour {
 	public int damage = 50;
 	public float secondsToRemove = 5f;
 	public bool infecting = false;
+	public bool resistable = true;
 
 	void Start () {
 		if (secondsToRemove > 0f) {
@@ -24,7 +25,7 @@ public class DamageZone : MonoBehaviour {
 			if (infecting) {
 				playerController.Infect ();
 			}
-			playerController.Damage (damage);
+			playerController.Damage (damage, resistable);
 		}
 	}
 }

@@ -31,6 +31,9 @@ public class Events : MonoBehaviour {
 
 	public GameObject fogObject;
 
+	public GameObject mealPrefab;
+	public GameObject helmetPrefab;
+
 	void Start () {
 		InvokeRepeating ("RandomEvent", 15f, 30f);
 		InvokeRepeating ("RandomObject", 0f, 10f);
@@ -126,6 +129,16 @@ public class Events : MonoBehaviour {
 			fogObject.SetActive (true);
 		}
 		Debug.Log ("current weather: " + weatherType.ToString ());
+
+		chance = Random.Range (0, 100);
+		Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
+		if (chance < 50) {
+			GameObject mealObject = Instantiate (mealPrefab);
+			mealObject.transform.position = position;
+		} else {
+			GameObject mealObject = Instantiate (helmetPrefab);
+			mealObject.transform.position = position;
+		}
 	}
 
 	void RandomObject () {
