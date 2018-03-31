@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BreadSpriteController.cs" />
+     <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\DamageZone.cs" />
      <Compile Include="Assets\Scripts\Dove.cs" />
      <Compile Include="Assets\Scripts\Events.cs" />

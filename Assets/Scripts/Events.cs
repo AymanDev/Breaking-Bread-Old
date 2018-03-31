@@ -22,33 +22,53 @@ public class Events : MonoBehaviour {
 	public GameObject attackingDove;
 
 	public float timeBetweenFly = 20f;
+	public Animator doveAnimator;
+
+	public float pitChance = 10f;
 
 	void Start () {
 		InvokeRepeating ("RandomEvent", 150f, 150f);
-		InvokeRepeating ("RandomObject", 30f, 30f);
-		InvokeRepeating ("Fly", timeBetweenFly, timeBetweenFly);
+		InvokeRepeating ("RandomObject", 0f, 30f);
+		Invoke ("Fly", timeBetweenFly);
 	}
 
 	void Fly () {
-		defaultDove.SetActive (false);
-		flyingDove.SetActive (true);
-		Invoke ("Attack", 1f);
+		GameObject doveObject = GameObject.Find ("DoveBoss");
+		GameObject playerObject = GameObject.Find ("Player");
+		doveObject.GetComponent<Dove> ().phase = 1;
+		float x = playerObject.transform.position.x;
+
+		Vector3 newPos = playerObject.transform.position;
+		newPos.Set (x, doveObject.transform.position.y, doveObject.transform.position.z);
+		doveObject.transform.position = newPos;
+		doveAnimator.SetBool ("attacking", true);
+		/*defaultDove.SetActive (false);
+		flyingDove.SetActive (true);*/
+		attackZone.transform.position = playerObject.transform.position;
+		Invoke ("Attack", 1.5f);
 	}
 
 	void Attack () {
-		flyingDove.SetActive (false);
-		attackingDove.SetActive (true);
-		Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
-		position.z = 100;
-		attackZone.transform.position = position;
+
+		/*flyingDove.SetActive (false);
+		attackingDove.SetActive (true);*/
+		/*Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
+		position.z = 100;*/
+
 		attackZone.SetActive (true);
 		Invoke ("Land", 1f);
 	}
 
 	void Land () {
-		attackZone.SetActive (false);
+		/*attackZone.SetActive (false);
 		attackingDove.SetActive (false);
-		defaultDove.SetActive (true);
+		defaultDove.SetActive (true);*/
+		attackZone.SetActive (false);
+		doveAnimator.SetBool ("attacking", false);
+		GameObject.Find ("DoveBoss").GetComponent<Dove> ().phase = 0;
+		if (timeBetweenFly >= 0.5f) {
+			timeBetweenFly -= 0.5f;
+		}
 	}
 
 	void RandomEvent () {
@@ -71,11 +91,15 @@ public class Events : MonoBehaviour {
 	void RandomObject () {
 		if (weatherType == EnumWeatherType.CLOUDY || weatherType == EnumWeatherType.FOGGY) {
 			int chance = Random.Range (0, 100);
-			if (chance <= 10) {
+			if (chance <= pitChance) {
 				Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
 				GameObject spawnedPit = Instantiate (pitPrefab);
 				position.z = 100;
 				spawnedPit.transform.position = position;
+				pitChance = 10f;
+				Camera.main.GetComponent<CameraShake> ().shakeDuration = 2f;
+			} else {
+				pitChance += 10f;
 			}
 		}
 		if (weatherType == EnumWeatherType.RAIN) {

@@ -9,7 +9,6 @@ public class DamageZone : MonoBehaviour {
 	public bool infecting = false;
 
 	void Start () {
-		Debug.Log ("start");
 		if (secondsToRemove > 0f) {
 			Invoke ("SelfDestruct", secondsToRemove);
 		}
@@ -26,6 +25,7 @@ public class DamageZone : MonoBehaviour {
 				playerController.Infect ();
 			}
 			playerController.Damage (damage);
+			Debug.Log ("damaging");
 		}
 	}
 }

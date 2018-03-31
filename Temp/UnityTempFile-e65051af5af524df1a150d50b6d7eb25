@@ -67,6 +67,7 @@
 -define:UNITY_EDITOR_OSX
 -define:UNITY_TEAM_LICENSE
 'Assets/Scripts/BreadSpriteController.cs'
+'Assets/Scripts/CameraShake.cs'
 'Assets/Scripts/DamageZone.cs'
 'Assets/Scripts/Dove.cs'
 'Assets/Scripts/Events.cs'
