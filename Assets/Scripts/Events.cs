@@ -38,7 +38,7 @@ public class Events : MonoBehaviour {
 		InvokeRepeating ("RandomEvent", 15f, 30f);
 		InvokeRepeating ("RandomObject", 0f, 10f);
 		Invoke ("Fly", timeBetweenFly);
-		Invoke ("SecondAttack", 10f);
+		Invoke ("SecondAttack", 12f);
 	}
 
 	void Fly () {
@@ -82,6 +82,12 @@ public class Events : MonoBehaviour {
 	}
 
 	void SecondAttack () {
+		GameObject doveObject = GameObject.Find ("DoveBoss");
+		doveObject.GetComponent<Dove> ().phase = 1;
+		Vector3 newPos = Vector3.zero;
+		newPos.z = 101f;
+		doveObject.transform.position = newPos;
+
 		int num = Random.Range (0, 3);
 		doveAnimator.SetBool ("secondAttack", true);
 		Vector3 pos = secondAttackZone.transform.position;
@@ -97,7 +103,7 @@ public class Events : MonoBehaviour {
 
 	void SpawnSecondAttackZone () {
 		secondAttackZoneDamage.SetActive (true);
-		Invoke ("DespawnSecondAttackZone", 0.05f);
+		Invoke ("DespawnSecondAttackZone", 0.1f);
 	}
 
 	void DespawnSecondAttackZone () {
@@ -107,6 +113,8 @@ public class Events : MonoBehaviour {
 		pos.y = -7f;
 		secondAttackZone.transform.position = pos;
 		doveAnimator.SetBool ("secondAttack", false);
+		GameObject doveObject = GameObject.Find ("DoveBoss");
+		doveObject.GetComponent<Dove> ().phase = 0;
 		Invoke ("SecondAttack", 10f);
 	}
 
