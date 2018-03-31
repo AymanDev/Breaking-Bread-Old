@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -11,8 +12,8 @@ public class PlayerController : MonoBehaviour {
 	private bool right = true;
 	[SerializeField]
 	private Animator animator;
-	private float horizontal;
-	private float vertical;
+	public float horizontal;
+	public float vertical;
 	[SerializeField]
 	private Text healthText;
 	public EnumBreadType breadType = EnumBreadType.NORMAL;
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject defaultBread;
 	public GameObject infectedBread;
 
+	public GameObject gameOverPanel;
+
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D> ();
 	}
@@ -28,6 +31,11 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		horizontal = Input.GetAxis ("Horizontal");
 		vertical = Input.GetAxis ("Vertical");
+
+		if (GameObject.Find ("Events").GetComponent<Events> ().weatherType == Events.EnumWeatherType.FOGGY) {
+			horizontal *= -1;
+			vertical *= -1;
+		}
 
 		if (vertical != 0f || horizontal != 0f) {
 			Move ();
@@ -68,6 +76,13 @@ public class PlayerController : MonoBehaviour {
 				breadType = EnumBreadType.EATED;
 			}
 		} 
+		if (health <= 0f) {
+			gameOverPanel.SetActive (true);
+			Destroy (gameObject);
+			Destroy (GameObject.Find ("ScoreText"));
+			//Time.timeScale = 0;
+		}
+		healthText.text = "Health: " + health + "%";
 	}
 
 	public void Infect () {
@@ -76,7 +91,8 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			breadType = EnumBreadType.INFECTED;
 		}
-		Invoke ("Pure", 30f);
+		speed -= 2f;
+		Invoke ("Pure", 15f);
 	}
 
 	void Pure () {
@@ -84,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 			breadType = EnumBreadType.EATED;
 		}
 		breadType = EnumBreadType.NORMAL;
+		speed = 10f;
 	}
 
 	public enum EnumBreadType {

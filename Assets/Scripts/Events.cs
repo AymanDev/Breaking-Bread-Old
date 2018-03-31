@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Events : MonoBehaviour {
 
-	[SerializeField]
-	private EnumWeatherType weatherType = EnumWeatherType.CLOUDY;
+	public EnumWeatherType weatherType = EnumWeatherType.CLOUDY;
 
 	public GameObject rainObject;
 	public GameObject spawnZone;
@@ -16,6 +15,10 @@ public class Events : MonoBehaviour {
 	private GameObject poolPrefab;
 
 	public GameObject attackZone;
+	public GameObject secondAttackZone;
+	public GameObject secondAttackZoneDamage;
+	public GameObject doveBomb;
+
 
 	public GameObject defaultDove;
 	public GameObject flyingDove;
@@ -26,10 +29,13 @@ public class Events : MonoBehaviour {
 
 	public float pitChance = 10f;
 
+	public GameObject fogObject;
+
 	void Start () {
-		InvokeRepeating ("RandomEvent", 150f, 150f);
-		InvokeRepeating ("RandomObject", 0f, 30f);
+		InvokeRepeating ("RandomEvent", 15f, 30f);
+		InvokeRepeating ("RandomObject", 0f, 10f);
 		Invoke ("Fly", timeBetweenFly);
+		Invoke ("SecondAttack", 10f);
 	}
 
 	void Fly () {
@@ -56,7 +62,7 @@ public class Events : MonoBehaviour {
 		position.z = 100;*/
 
 		attackZone.SetActive (true);
-		Invoke ("Land", 1f);
+		Invoke ("Land", 0.7f);
 	}
 
 	void Land () {
@@ -69,21 +75,55 @@ public class Events : MonoBehaviour {
 		if (timeBetweenFly >= 0.5f) {
 			timeBetweenFly -= 0.5f;
 		}
+		Invoke ("Fly", timeBetweenFly);
+	}
+
+	void SecondAttack () {
+		int num = Random.Range (0, 3);
+		doveAnimator.SetBool ("secondAttack", true);
+		Vector3 pos = secondAttackZone.transform.position;
+		pos.y -= num * 3;
+		secondAttackZone.transform.position = pos;
+		/*pos = doveBomb.transform.position;
+		pos.y -= num * 3;
+		doveBomb.transform.position = pos;*/
+
+		secondAttackZone.SetActive (true);
+		Invoke ("SpawnSecondAttackZone", 0.7f);
+	}
+
+	void SpawnSecondAttackZone () {
+		secondAttackZoneDamage.SetActive (true);
+		Invoke ("DespawnSecondAttackZone", 0.05f);
+	}
+
+	void DespawnSecondAttackZone () {
+		secondAttackZoneDamage.SetActive (false);
+		secondAttackZone.SetActive (false);
+		Vector3 pos = secondAttackZone.transform.position;
+		pos.y = -7f;
+		secondAttackZone.transform.position = pos;
+		doveAnimator.SetBool ("secondAttack", false);
+		Invoke ("SecondAttack", 10f);
 	}
 
 	void RandomEvent () {
+		GameObject gameObject = GameObject.Find ("Player");
+		PlayerController playerController = gameObject.GetComponent<PlayerController> ();
 		rainObject.SetActive (false);
+		fogObject.SetActive (false);
 
 		int chance = Random.Range (0, 100);
 		if (chance < 35) {
 			weatherType = EnumWeatherType.RAIN;
 			rainObject.SetActive (true);
 		}
-		if (chance >= 35 && chance < 70) {
+		if (chance >= 35 && chance < 60) {
 			weatherType = EnumWeatherType.CLOUDY;
 		}
-		if (chance >= 70) {
+		if (chance >= 60) {
 			weatherType = EnumWeatherType.FOGGY;
+			fogObject.SetActive (true);
 		}
 		Debug.Log ("current weather: " + weatherType.ToString ());
 	}
@@ -94,6 +134,9 @@ public class Events : MonoBehaviour {
 			if (chance <= pitChance) {
 				Vector3 position = RandomPointInBox (spawnZone.transform.position, spawnZone.GetComponent<Collider2D> ().transform.localScale);
 				GameObject spawnedPit = Instantiate (pitPrefab);
+				if (GameObject.Find ("Player").GetComponent<Collider2D> ().IsTouching (spawnedPit.GetComponent<Collider2D> ())) {
+					Destroy (spawnedPit);
+				}
 				position.z = 100;
 				spawnedPit.transform.position = position;
 				pitChance = 10f;
@@ -119,7 +162,7 @@ public class Events : MonoBehaviour {
 		);
 	}
 
-	enum EnumWeatherType {
+	public enum EnumWeatherType {
 		RAIN,
 		CLOUDY,
 		FOGGY

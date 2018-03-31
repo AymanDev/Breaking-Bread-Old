@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class GameOver : MonoBehaviour {
+
+
+	private Text text;
+
+	void Start () {
+		text = GetComponent<Text> ();
+		text.text = "Score: " + Convert.ToInt32 (GameObject.Find ("ScoreText").GetComponent<Score> ().score);
+	}
+
+	public void Reset () {
+		SceneManager.LoadScene (1);
+		Time.timeScale = 1;
+	}
+}

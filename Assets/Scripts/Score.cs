@@ -9,7 +9,7 @@ public class Score : MonoBehaviour {
 	[SerializeField]
 	private Timer timer;
 	private Text text;
-	private double score = 0;
+	public double score = 0;
 
 	void Start () {
 		text = GetComponent<Text> ();

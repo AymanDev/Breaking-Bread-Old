@@ -25,7 +25,6 @@ public class DamageZone : MonoBehaviour {
 				playerController.Infect ();
 			}
 			playerController.Damage (damage);
-			Debug.Log ("damaging");
 		}
 	}
 }

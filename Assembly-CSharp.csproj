@@ -51,9 +51,11 @@
      <Compile Include="Assets\Scripts\DamageZone.cs" />
      <Compile Include="Assets\Scripts\Dove.cs" />
      <Compile Include="Assets\Scripts\Events.cs" />
+     <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\SkinController.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
