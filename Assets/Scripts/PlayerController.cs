@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
 
@@ -33,8 +34,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
-		horizontal = Input.GetAxis ("Horizontal");
-		vertical = Input.GetAxis ("Vertical");
+		GameObject joystickObject = GameObject.Find ("Joystick");
+		if (joystickObject != null) {
+			Joystick joystick = joystickObject.GetComponent<Joystick> ();
+			horizontal = joystick.horizontal;
+			vertical = joystick.vertical;
+		} else {
+			horizontal = Input.GetAxis ("Horizontal");
+			vertical = Input.GetAxis ("Vertical");
+		}
 
 		if (GameObject.Find ("Events").GetComponent<Events> ().weatherType == Events.EnumWeatherType.FOGGY) {
 			horizontal *= -1;

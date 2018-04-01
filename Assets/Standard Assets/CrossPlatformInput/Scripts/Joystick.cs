@@ -40,6 +40,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			var delta = m_StartPos - value;
 			delta.y = -delta.y;
 			delta /= MovementRange;
+
 			if (m_UseX)
 			{
 				m_HorizontalVirtualAxis.Update(-delta.x);
