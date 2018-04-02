@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -34,12 +35,12 @@ public class PlayerController : MonoBehaviour
         if (joystickObject != null)
         {
             var joystick = joystickObject.GetComponent<Joystick>();
-            if (joystick.m_UseX)
+            if (Math.Abs(joystick.horizontal) > 0f)
             {
                 horizontal = joystick.horizontal;
             }
 
-            if (joystick.m_UseY)
+            if (Math.Abs(joystick.vertical) > 0f)
             {
                 vertical = joystick.vertical;
             }
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         helmetObjectArmor.SetActive(resistCharges > 0);
 
-        if (vertical != 0f || horizontal != 0f)
+        if (Math.Abs(vertical) > 0f || Math.Abs(horizontal) > 0f)
         {
             Move();
             animator.SetBool("walking", true);
@@ -107,19 +108,7 @@ public class PlayerController : MonoBehaviour
             {
                 health -= damage;
             }
-
-            if (health <= 50)
-            {
-                if (breadType == EnumBreadType.INFECTED)
-                {
-                    breadType = EnumBreadType.EATED_INFECTED;
-                }
-                else
-                {
-                    breadType = EnumBreadType.EATED;
-                }
-            }
-
+         
             if (health <= 0f)
             {
                 gameOverPanel.SetActive(true);
@@ -129,6 +118,23 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (health <= 50)
+        {
+            breadType = breadType == EnumBreadType.INFECTED ? EnumBreadType.EATED_INFECTED : EnumBreadType.EATED;
+        }
+        else if (breadType != EnumBreadType.INFECTED)
+        {
+            if (breadType == EnumBreadType.EATED_INFECTED)
+            {
+                breadType = EnumBreadType.INFECTED;
+            }
+
+            if (breadType == EnumBreadType.EATED)
+            {
+                breadType = EnumBreadType.NORMAL;
+            }
+        }
+        
         healthText.text = "Health: " + health + "%";
         Camera.main.GetComponent<CameraShake>().shakeDuration = 0.4f;
     }
@@ -139,6 +145,7 @@ public class PlayerController : MonoBehaviour
         breadType = breadType == EnumBreadType.EATED ? EnumBreadType.EATED_INFECTED : EnumBreadType.INFECTED;
 
         speed = 7f;
+        Damage(0, false);
         Invoke("Pure", 16f);
     }
 
@@ -151,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
         breadType = EnumBreadType.NORMAL;
         speed = 10f;
+        Damage(0, false);
     }
 
     public enum EnumBreadType
