@@ -35,14 +35,21 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		GameObject joystickObject = GameObject.Find ("Joystick");
+		horizontal = Input.GetAxis ("Horizontal");
+		vertical = Input.GetAxis ("Vertical");
+
 		if (joystickObject != null) {
 			Joystick joystick = joystickObject.GetComponent<Joystick> ();
-			horizontal = joystick.horizontal;
-			vertical = joystick.vertical;
-		} else {
+			if (joystick.m_UseX) {
+				horizontal = joystick.horizontal;
+			}
+			if (joystick.m_UseY) {
+				vertical = joystick.vertical;
+			}
+		} /*else {
 			horizontal = Input.GetAxis ("Horizontal");
 			vertical = Input.GetAxis ("Vertical");
-		}
+		}*/
 
 		if (GameObject.Find ("Events").GetComponent<Events> ().weatherType == Events.EnumWeatherType.FOGGY) {
 			horizontal *= -1;

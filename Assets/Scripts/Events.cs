@@ -34,11 +34,24 @@ public class Events : MonoBehaviour {
 	public GameObject mealPrefab;
 	public GameObject helmetPrefab;
 
+	private bool attacking = false;
+
 	void Start () {
 		InvokeRepeating ("RandomEvent", 15f, 30f);
 		InvokeRepeating ("RandomObject", 0f, 10f);
-		Invoke ("Fly", timeBetweenFly);
-		Invoke ("SecondAttack", 12f);
+		InvokeRepeating ("RandomAttack", 2f, 4f);
+	/*	Invoke ("Fly", timeBetweenFly);
+		Invoke ("SecondAttack", 12f);*/
+	}
+
+	void RandomAttack(){
+		if (!attacking) {
+			int chance = Random.Range (0, 100);
+			if (chance <= 45) {
+				SecondAttack ();
+			}
+			Invoke ("Fly", timeBetweenFly);
+		}
 	}
 
 	void Fly () {
@@ -53,7 +66,10 @@ public class Events : MonoBehaviour {
 		doveAnimator.SetBool ("attacking", true);
 		/*defaultDove.SetActive (false);
 		flyingDove.SetActive (true);*/
-		attackZone.transform.position = playerObject.transform.position;
+
+		newPos.Set (x, attackZone.transform.position.y, attackZone.transform.position.z);
+		attackZone.transform.position = newPos;
+		attacking = true;
 		Invoke ("Attack", 1.5f);
 	}
 
@@ -78,7 +94,8 @@ public class Events : MonoBehaviour {
 		if (timeBetweenFly > 1.5f) {
 			timeBetweenFly -= 0.3f;
 		}
-		Invoke ("Fly", timeBetweenFly);
+		attacking = false;
+		//Invoke ("Fly", timeBetweenFly);
 	}
 
 	void SecondAttack () {
@@ -98,6 +115,7 @@ public class Events : MonoBehaviour {
 		doveBomb.transform.position = pos;*/
 
 		secondAttackZone.SetActive (true);
+		attacking = true;
 		Invoke ("SpawnSecondAttackZone", 0.7f);
 	}
 
@@ -116,6 +134,7 @@ public class Events : MonoBehaviour {
 		GameObject doveObject = GameObject.Find ("DoveBoss");
 		doveObject.GetComponent<Dove> ().phase = 0;
 		Invoke ("SecondAttack", 10f);
+		attacking = false;
 	}
 
 	void RandomEvent () {
