@@ -1,147 +1,165 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 20.0f;
+    public int health = 100;
+    private Rigidbody2D rigidBody;
+    private bool right = true;
+    [SerializeField] private Animator animator;
+    public float horizontal;
+    public float vertical;
+    [SerializeField] private Text healthText;
+    public EnumBreadType breadType = EnumBreadType.NORMAL;
+    private bool infected = false;
 
-	public float speed = 20.0f;
-	public int health = 100;
-	private Rigidbody2D rigidBody;
-	private bool right = true;
-	[SerializeField]
-	private Animator animator;
-	public float horizontal;
-	public float vertical;
-	[SerializeField]
-	private Text healthText;
-	public EnumBreadType breadType = EnumBreadType.NORMAL;
-	private bool infected = false;
+    public GameObject gameOverPanel;
 
-	public GameObject defaultBread;
-	public GameObject infectedBread;
+    public int resistCharges;
 
-	public GameObject gameOverPanel;
+    [SerializeField] private GameObject helmetObjectArmor;
 
-	public int resistCharges = 0;
-	[SerializeField]
-	private GameObject helmetObjectArmor;
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
 
-	void Start () {
-		rigidBody = GetComponent<Rigidbody2D> ();
-	}
+    private void Update()
+    {
+        var joystickObject = GameObject.Find("Joystick");
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
-	void Update () {
-		GameObject joystickObject = GameObject.Find ("Joystick");
-		horizontal = Input.GetAxis ("Horizontal");
-		vertical = Input.GetAxis ("Vertical");
+        if (joystickObject != null)
+        {
+            var joystick = joystickObject.GetComponent<Joystick>();
+            if (joystick.m_UseX)
+            {
+                horizontal = joystick.horizontal;
+            }
 
-		if (joystickObject != null) {
-			Joystick joystick = joystickObject.GetComponent<Joystick> ();
-			if (joystick.m_UseX) {
-				horizontal = joystick.horizontal;
-			}
-			if (joystick.m_UseY) {
-				vertical = joystick.vertical;
-			}
-		} /*else {
+            if (joystick.m_UseY)
+            {
+                vertical = joystick.vertical;
+            }
+        } /*else {
 			horizontal = Input.GetAxis ("Horizontal");
 			vertical = Input.GetAxis ("Vertical");
 		}*/
 
-		if (GameObject.Find ("Events").GetComponent<Events> ().weatherType == Events.EnumWeatherType.FOGGY) {
-			horizontal *= -1;
-			vertical *= -1;
-		}
+        if (GameObject.Find("Events").GetComponent<Events>().weatherType == Events.EnumWeatherType.FOGGY)
+        {
+            horizontal *= -1;
+            vertical *= -1;
+        }
 
-		helmetObjectArmor.SetActive (resistCharges > 0);
+        helmetObjectArmor.SetActive(resistCharges > 0);
 
-		if (vertical != 0f || horizontal != 0f) {
-			Move ();
-			animator.SetBool ("walking", true);
-			transform.FindChild ("Particle System").gameObject.SetActive (true);
-		} else if (animator.GetBool ("walking")) {
-			animator.SetBool ("walking", false);
-			transform.FindChild ("Particle System").gameObject.SetActive (false);
-		}
-	}
+        if (vertical != 0f || horizontal != 0f)
+        {
+            Move();
+            animator.SetBool("walking", true);
+            transform.FindChild("Particle System").gameObject.SetActive(true);
+        }
+        else if (animator.GetBool("walking"))
+        {
+            animator.SetBool("walking", false);
+            transform.FindChild("Particle System").gameObject.SetActive(false);
+        }
+    }
 
-	void Move () {
-		Vector2 force = rigidBody.transform.position;
+    private void Move()
+    {
+        var force = rigidBody.transform.position;
 
-		force.x += horizontal * Time.deltaTime * speed;
-		force.y += vertical * Time.deltaTime * speed;
-		rigidBody.MovePosition (force);
-		if (horizontal > 0f && !right) {
-			Flip ();
-			right = true;
-		} else if (horizontal < 0f && right) {
-			Flip ();
-			right = false;
-		}
-	}
+        force.x += horizontal * Time.deltaTime * speed;
+        force.y += vertical * Time.deltaTime * speed;
+        rigidBody.MovePosition(force);
+        if (horizontal > 0f && !right)
+        {
+            Flip();
+            right = true;
+        }
+        else if (horizontal < 0f && right)
+        {
+            Flip();
+            right = false;
+        }
+    }
 
-	void Flip () {
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
+    private void Flip()
+    {
+        var theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 
-	public void Damage (int damage, bool resistable) {
-		if (damage > 0) {
-			if (resistable && resistCharges > 0) {
-				resistCharges--;
-			} else {
-				health -= damage;
-			}
+    public void Damage(int damage, bool resistable)
+    {
+        if (damage > 0)
+        {
+            if (resistable && resistCharges > 0)
+            {
+                resistCharges--;
+            }
+            else
+            {
+                health -= damage;
+            }
 
-			if (health <= 50) {
-				if (breadType == EnumBreadType.INFECTED) {
-					breadType = EnumBreadType.EATED_INFECTED;
-				} else {
-					breadType = EnumBreadType.EATED;
-				}
-			} 
-			if (health <= 0f) {
-				gameOverPanel.SetActive (true);
-				Destroy (gameObject);
-				Destroy (GameObject.Find ("HealthPanel"));
-				Destroy (GameObject.Find ("TimePanel"));
+            if (health <= 50)
+            {
+                if (breadType == EnumBreadType.INFECTED)
+                {
+                    breadType = EnumBreadType.EATED_INFECTED;
+                }
+                else
+                {
+                    breadType = EnumBreadType.EATED;
+                }
+            }
 
-			}
-		}
-		healthText.text = "Health: " + health + "%";
-		Camera.main.GetComponent<CameraShake> ().shakeDuration = 0.4f;
-	}
+            if (health <= 0f)
+            {
+                gameOverPanel.SetActive(true);
+                Destroy(gameObject);
+                Destroy(GameObject.Find("HealthPanel"));
+                Destroy(GameObject.Find("TimePanel"));
+            }
+        }
 
-	public void Infect () {
-		if (breadType != EnumBreadType.INFECTED || breadType != EnumBreadType.EATED_INFECTED) {
-			if (breadType == EnumBreadType.EATED) {
-				breadType = EnumBreadType.EATED_INFECTED;
-			} else {
-				breadType = EnumBreadType.INFECTED;
-			}
-			speed = 7f;
-			Invoke ("Pure", 16f);
-		}
-	}
+        healthText.text = "Health: " + health + "%";
+        Camera.main.GetComponent<CameraShake>().shakeDuration = 0.4f;
+    }
 
-	void Pure () {
-		if (breadType == EnumBreadType.EATED_INFECTED) {
-			breadType = EnumBreadType.EATED;
-		}
-		breadType = EnumBreadType.NORMAL;
-		speed = 10f;
-	}
+    public void Infect()
+    {
+        if (breadType == EnumBreadType.INFECTED && breadType == EnumBreadType.EATED_INFECTED) return;
+        breadType = breadType == EnumBreadType.EATED ? EnumBreadType.EATED_INFECTED : EnumBreadType.INFECTED;
 
-	public enum EnumBreadType {
-		NORMAL,
-		EATED,
-		INFECTED,
-		EATED_INFECTED,
-		DRYED,
-		DRYED_EATED
-	}
+        speed = 7f;
+        Invoke("Pure", 16f);
+    }
+
+    private void Pure()
+    {
+        if (breadType == EnumBreadType.EATED_INFECTED)
+        {
+            breadType = EnumBreadType.EATED;
+        }
+
+        breadType = EnumBreadType.NORMAL;
+        speed = 10f;
+    }
+
+    public enum EnumBreadType
+    {
+        NORMAL,
+        EATED,
+        INFECTED,
+        EATED_INFECTED,
+        DRYED,
+        DRYED_EATED
+    }
 }

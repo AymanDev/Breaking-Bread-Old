@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doven", "Assembly-CSharp-firstpass.csproj", "{55B9CB91-593F-D1E9-ACA5-27681F39CE38}"
+Project("{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{55B9CB91-593F-D1E9-ACA5-27681F39CE38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doven", "Assembly-CSharp.csproj", "{B83EEBF8-CD21-A69C-8062-FDCD68CBCA12}"
+Project("{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{B83EEBF8-CD21-A69C-8062-FDCD68CBCA12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doven", "Assembly-CSharp-Editor-firstpass.csproj", "{5F27DA4C-A442-039B-E866-89AB38E26003}"
+Project("{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{5F27DA4C-A442-039B-E866-89AB38E26003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,31 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DamageZone : MonoBehaviour {
+public class DamageZone : MonoBehaviour
+{
+    public int damage = 50;
+    public float secondsToRemove = 5f;
+    public bool infecting;
+    public bool resistable = true;
 
-	public int damage = 50;
-	public float secondsToRemove = 5f;
-	public bool infecting = false;
-	public bool resistable = true;
+    void Start()
+    {
+        if (secondsToRemove > 0f)
+        {
+            Invoke("SelfDestruct", secondsToRemove);
+        }
+    }
 
-	void Start () {
-		if (secondsToRemove > 0f) {
-			Invoke ("SelfDestruct", secondsToRemove);
-		}
-	}
+    void SelfDestruct()
+    {
+        Destroy(gameObject);
+    }
 
-	void SelfDestruct () {
-		Destroy (gameObject);
-	}
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (!collider.tag.Equals("Player")) return;
+        var playerController = collider.GetComponent<PlayerController>();
 
-	void OnTriggerEnter2D (Collider2D collider) {
-		if (collider.tag.Equals ("Player")) {
-			PlayerController playerController = collider.GetComponent < PlayerController > ();
-			if (infecting) {
-				playerController.Infect ();
-			}
-			playerController.Damage (damage, resistable);
-		}
-	}
+        if (infecting)
+        {
+            playerController.Infect();
+        }
+
+        playerController.Damage(damage, resistable);
+    }
 }
