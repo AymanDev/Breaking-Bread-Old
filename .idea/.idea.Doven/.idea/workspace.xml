@@ -2,49 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="148f33ff-ff2b-4731-b775-ca8b5cc75221" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/contentModel.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/indexLayout.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/riderModule.iml" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor-firstpass.csproj" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BreadSpriteController.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/BreadSpriteController.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraShake.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraShake.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DamageZone.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/DamageZone.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dove.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Dove.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Events.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameOver.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/GameOver.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HealthDrop.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/HealthDrop.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HelmetDrop.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/HelmetDrop.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Joystick.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Joystick.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Score.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Score.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SkinController.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/SkinController.cs" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Timer.cs" afterPath="$PROJECT_DIR$/Assets/Scripts/Timer.cs" />
-      <change beforePath="$PROJECT_DIR$/Doven.sln" afterPath="$PROJECT_DIR$/Doven.sln" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.Doven/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" afterPath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" />
-      <change beforePath="$PROJECT_DIR$/Library/EditorUserBuildSettings.asset" afterPath="$PROJECT_DIR$/Library/EditorUserBuildSettings.asset" />
-      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll" />
-      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll.mdb" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll.mdb" />
+      <change beforePath="$PROJECT_DIR$/Library/EditorInstance.json" afterPath="" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb" />
       <change beforePath="$PROJECT_DIR$/Library/assetDatabase3" afterPath="$PROJECT_DIR$/Library/assetDatabase3" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/00/00000000000000004000000000000000" afterPath="$PROJECT_DIR$/Library/metadata/00/00000000000000004000000000000000" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/08/08cf5476866ce42b89e217711722e4cd" afterPath="$PROJECT_DIR$/Library/metadata/08/08cf5476866ce42b89e217711722e4cd" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/1c/1c1f1369b66ec4dea93274d9ba29aabe" afterPath="$PROJECT_DIR$/Library/metadata/1c/1c1f1369b66ec4dea93274d9ba29aabe" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/2a/2a73a8d23d9534bce9b8eb917987bdae" afterPath="$PROJECT_DIR$/Library/metadata/2a/2a73a8d23d9534bce9b8eb917987bdae" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/46/4624b74a92919416b8ade3a478ef1939" afterPath="$PROJECT_DIR$/Library/metadata/46/4624b74a92919416b8ade3a478ef1939" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/72/72120733f37b64602a505975a25f3df0" afterPath="$PROJECT_DIR$/Library/metadata/72/72120733f37b64602a505975a25f3df0" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/90/902a4c6849b684041822082bfbc53a9f" afterPath="$PROJECT_DIR$/Library/metadata/90/902a4c6849b684041822082bfbc53a9f" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/a5/a52849b4b67e848658b7009b2f847310" afterPath="$PROJECT_DIR$/Library/metadata/a5/a52849b4b67e848658b7009b2f847310" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/ad/ad9c8b67a08eb4bd8b686d6bc5bf1173" afterPath="$PROJECT_DIR$/Library/metadata/ad/ad9c8b67a08eb4bd8b686d6bc5bf1173" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/d1/d1d122b76a52f4bb18ba0f826c8cf7e1" afterPath="$PROJECT_DIR$/Library/metadata/d1/d1d122b76a52f4bb18ba0f826c8cf7e1" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/d2/d2256645f7e874865b6c28b33e9a5521" afterPath="$PROJECT_DIR$/Library/metadata/d2/d2256645f7e874865b6c28b33e9a5521" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/d3/d33f17914220046baaa33527be1dbbfb" afterPath="$PROJECT_DIR$/Library/metadata/d3/d33f17914220046baaa33527be1dbbfb" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/e5/e5dbc0377e90d4ac5a6ca5945ad3bb64" afterPath="$PROJECT_DIR$/Library/metadata/e5/e5dbc0377e90d4ac5a6ca5945ad3bb64" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/0f/0f3ecd19f1c0b4768946550df72a8457" afterPath="$PROJECT_DIR$/Library/metadata/0f/0f3ecd19f1c0b4768946550df72a8457" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/ea/ead1ea6d86fa24c1ca5cb1cb557fe40d" afterPath="$PROJECT_DIR$/Library/metadata/ea/ead1ea6d86fa24c1ca5cb1cb557fe40d" />
+      <change beforePath="$PROJECT_DIR$/Temp/UnityLockfile" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Temp/UnityTempFile-0cd114f5400de4e92868f3ffacda5625" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Temp/UnityTempFile-3dfd23268c416472ba1300b03944b809" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Temp/UnityTempFile-7152dc39a044d4a2cb244cd243024df6" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -226,8 +195,8 @@
       <file leaf-file-name="SkinController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/SkinController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="19" lean-forward="false" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+            <state relative-caret-position="405">
+              <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding>
                 <marker date="1522676604000" expanded="true" signature="63:890" ph="{...}" />
                 <marker date="1522676604000" expanded="true" signature="181:221" ph="{...}" />
@@ -378,12 +347,12 @@
       <workItem from="1522669182046" duration="602000" />
       <workItem from="1522669916124" duration="242000" />
       <workItem from="1522671083521" duration="272000" />
-      <workItem from="1522676275301" duration="371000" />
+      <workItem from="1522676275301" duration="629000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2355000" />
+    <option name="totallyTimeSpent" value="2613000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -396,7 +365,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -736,8 +704,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/SkinController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="19" lean-forward="false" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        <state relative-caret-position="405">
+          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
             <marker date="1522676604000" expanded="true" signature="63:890" ph="{...}" />
             <marker date="1522676604000" expanded="true" signature="181:221" ph="{...}" />
