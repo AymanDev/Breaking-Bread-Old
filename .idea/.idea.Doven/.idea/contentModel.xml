@@ -23,6 +23,7 @@
           <e p="HelmetDrop.cs" t="Include" />
           <e p="Joystick.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
+          <e p="PauseMenu.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="Score.cs" t="Include" />
           <e p="SkinController.cs" t="Include" />
