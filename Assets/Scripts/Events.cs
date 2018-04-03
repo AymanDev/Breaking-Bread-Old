@@ -128,7 +128,7 @@ public class Events : MonoBehaviour
         Invoke("DespawnSecondAttackZone", 0.1f);
     }
 
-    void DespawnSecondAttackZone()
+    private void DespawnSecondAttackZone()
     {
         secondAttackZoneDamage.SetActive(false);
         secondAttackZone.SetActive(false);
@@ -174,7 +174,7 @@ public class Events : MonoBehaviour
         chance = Random.Range(0, 100);
 
         var position = RandomPointInBox(spawnZone.transform.position,
-            spawnZone.GetComponent<Collider2D>().transform.localScale);
+            spawnZone.GetComponent<BoxCollider2D>().size);
         if (chance <= 60)
         {
             GameObject mealObject = Instantiate(mealPrefab);
@@ -198,7 +198,7 @@ public class Events : MonoBehaviour
                 if (chance <= pitChance)
                 {
                     position = RandomPointInBox(spawnZone.transform.position,
-                        spawnZone.GetComponent<Collider2D>().transform.localScale);
+                        spawnZone.GetComponent<BoxCollider2D>().size);
 
                     GameObject spawnedPit = Instantiate(pitPrefab);
                     if (GameObject.Find("Player").GetComponent<Collider2D>()
@@ -220,7 +220,7 @@ public class Events : MonoBehaviour
                 break;
             case EnumWeatherType.RAIN:
                 position = RandomPointInBox(spawnZone.transform.position,
-                    spawnZone.GetComponent<Collider2D>().transform.localScale);
+                    spawnZone.GetComponent<BoxCollider2D>().size);
                 GameObject spawnedPool = Instantiate(poolPrefab);
                 position.z = 100;
                 spawnedPool.transform.position = position;
