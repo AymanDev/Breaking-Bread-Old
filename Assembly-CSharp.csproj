@@ -53,12 +53,15 @@
     <Compile Include="Assets\Scripts\BreadSpriteController.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\DamageZone.cs" />
+    <Compile Include="Assets\Scripts\DeathEvent.cs" />
     <Compile Include="Assets\Scripts\Dove.cs" />
     <Compile Include="Assets\Scripts\Events.cs" />
     <Compile Include="Assets\Scripts\GameOver.cs" />
     <Compile Include="Assets\Scripts\HealthDrop.cs" />
     <Compile Include="Assets\Scripts\HelmetDrop.cs" />
+    <Compile Include="Assets\Scripts\Highscore.cs" />
     <Compile Include="Assets\Scripts\Joystick.cs" />
+    <Compile Include="Assets\Scripts\MD5.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />

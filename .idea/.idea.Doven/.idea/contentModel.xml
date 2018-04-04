@@ -16,13 +16,16 @@
           <e p="BreadSpriteController.cs" t="Include" />
           <e p="CameraShake.cs" t="Include" />
           <e p="DamageZone.cs" t="Include" />
+          <e p="DeathEvent.cs" t="Include" />
           <e p="Dove.cs" t="Include" />
           <e p="Events.cs" t="Include" />
           <e p="GameOver.cs" t="Include" />
           <e p="HealthDrop.cs" t="Include" />
           <e p="HelmetDrop.cs" t="Include" />
+          <e p="Highscore.cs" t="Include" />
           <e p="Joystick.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
+          <e p="MD5.cs" t="Include" />
           <e p="PauseMenu.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="Score.cs" t="Include" />
