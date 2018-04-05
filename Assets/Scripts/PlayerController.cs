@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(GameObject.Find("HealthPanel"));
                 Destroy(GameObject.Find("TimePanel"));
             }
+            Camera.main.GetComponent<CameraShake>().shakeDuration = 0.4f;
         }
 
         if (health <= 50)
@@ -136,7 +137,6 @@ public class PlayerController : MonoBehaviour
         }
         
         healthText.text = "Health: " + health + "%";
-        Camera.main.GetComponent<CameraShake>().shakeDuration = 0.4f;
     }
 
     public void Infect()
