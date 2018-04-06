@@ -14,17 +14,28 @@ public class Highscore : MonoBehaviour
     public GameObject applyButton;
     public Text scoreText;
     public Text highscoreText;
+    public Text wrongSymblosText;
 
     public int personalHighscore;
 
     private void Start()
     {
-        applyButton.GetComponent<Button>().enabled = false;
+        applyButton.GetComponent<Button>().interactable = false;
+        TouchScreenKeyboard.Open(inputField.text);
     }
 
     public void ChangingField()
     {
-        applyButton.GetComponent<Button>().enabled = inputField.text.Length > 3;
+        var wrongSymblos = inputField.text.IndexOfAny(
+                               new[]
+                               {
+                                   ';', '/', '\'', '\"',
+                                   ':', '{', '}', '`',
+                                   ',', '.', '?', ' '
+                               }) != -1;
+        applyButton.GetComponent<Button>().interactable = inputField.text.Length > 3 && !wrongSymblos;
+        wrongSymblosText.gameObject.SetActive(wrongSymblos);
+        Debug.Log("mem");
     }
 
     public void SetNickname()
@@ -51,7 +62,6 @@ public class Highscore : MonoBehaviour
         {
             Debug.LogWarning("There was an error posting the high score: " + www.error);
         }
-        
     }
 
     public IEnumerator GetHighscores()

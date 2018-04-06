@@ -31,7 +31,7 @@ public class Events : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("RandomEvent", 15f, 30f);
-        InvokeRepeating("RandomObject", 0f, 10f);
+        InvokeRepeating("RandomObject", 2f, 10f);
         InvokeRepeating("RandomAttack", 2f, 4f);
         /*	Invoke ("Fly", timeBetweenFly);
             Invoke ("SecondAttack", 12f);*/
@@ -52,8 +52,10 @@ public class Events : MonoBehaviour
 
     private void Fly()
     {
-        GameObject doveObject = GameObject.Find("DoveBoss");
-        GameObject playerObject = GameObject.Find("Player");
+        if (attacking) return;
+
+        var doveObject = GameObject.Find("DoveBoss");
+        var playerObject = GameObject.Find("Player");
         doveObject.GetComponent<Dove>().phase = 1;
         var x = playerObject.transform.position.x;
 
@@ -78,7 +80,7 @@ public class Events : MonoBehaviour
         position.z = 100;*/
 
         attackZone.SetActive(true);
-        Invoke("Land", 0.7f);
+        Invoke("Land", 0.5f);
     }
 
     private void Land()
@@ -102,15 +104,17 @@ public class Events : MonoBehaviour
 
     private void SecondAttack()
     {
+        if (attacking) return;
+
         var doveObject = GameObject.Find("DoveBoss");
         doveObject.GetComponent<Dove>().phase = 1;
-        var newPos = Vector3.zero;
-        newPos.z = 101f;
-        doveObject.transform.position = newPos;
+        /* var newPos = Vector3.zero;
+         newPos.z = 101f;
+         doveObject.transform.position = newPos;*/
 
         var num = Random.Range(0, 3);
         doveAnimator.SetBool("secondAttack", true);
-        Vector3 pos = secondAttackZone.transform.position;
+        var pos = secondAttackZone.transform.position;
         pos.y -= num * 3;
         secondAttackZone.transform.position = pos;
         /*pos = doveBomb.transform.position;
@@ -133,20 +137,20 @@ public class Events : MonoBehaviour
         secondAttackZoneDamage.SetActive(false);
         secondAttackZone.SetActive(false);
 
-        Vector3 pos = secondAttackZone.transform.position;
+        var pos = secondAttackZone.transform.position;
         pos.y = -7f;
         secondAttackZone.transform.position = pos;
 
         doveAnimator.SetBool("secondAttack", false);
 
-        GameObject doveObject = GameObject.Find("DoveBoss");
+        var doveObject = GameObject.Find("DoveBoss");
         doveObject.GetComponent<Dove>().phase = 0;
 
         Invoke("SecondAttack", 10f);
         attacking = false;
     }
 
-    void RandomEvent()
+    private void RandomEvent()
     {
         rainObject.SetActive(false);
         fogObject.SetActive(false);
@@ -174,7 +178,7 @@ public class Events : MonoBehaviour
         chance = Random.Range(0, 100);
 
         var position = RandomPointInBox(spawnZone.transform.position,
-            spawnZone.GetComponent<BoxCollider2D>().size);
+            spawnZone.transform.localScale);
         if (chance <= 60)
         {
             GameObject mealObject = Instantiate(mealPrefab);
@@ -198,9 +202,9 @@ public class Events : MonoBehaviour
                 if (chance <= pitChance)
                 {
                     position = RandomPointInBox(spawnZone.transform.position,
-                        spawnZone.GetComponent<BoxCollider2D>().size);
+                        spawnZone.transform.localScale);
 
-                    GameObject spawnedPit = Instantiate(pitPrefab);
+                    var spawnedPit = Instantiate(pitPrefab);
                     if (GameObject.Find("Player").GetComponent<Collider2D>()
                         .IsTouching(spawnedPit.GetComponent<Collider2D>()))
                     {
@@ -220,8 +224,8 @@ public class Events : MonoBehaviour
                 break;
             case EnumWeatherType.RAIN:
                 position = RandomPointInBox(spawnZone.transform.position,
-                    spawnZone.GetComponent<BoxCollider2D>().size);
-                GameObject spawnedPool = Instantiate(poolPrefab);
+                    spawnZone.transform.localScale);
+                var spawnedPool = Instantiate(poolPrefab);
                 position.z = 100;
                 spawnedPool.transform.position = position;
                 break;

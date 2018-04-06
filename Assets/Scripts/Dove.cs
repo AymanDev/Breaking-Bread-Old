@@ -19,7 +19,17 @@ public class Dove : MonoBehaviour
 
     private void RandomMovement()
     {
+        if (phase == 1)
+        {
+            rigidBody.isKinematic = true;
+        }
+
         if (phase != 0) return;
+        if (rigidBody.isKinematic)
+        {
+            rigidBody.isKinematic = false;
+        }
+
         var side = Random.Range(0, 100);
         var force = new Vector2(-speedPush, 200f);
 
