@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BreadSpriteController.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\ChangePhase.cs" />
     <Compile Include="Assets\Scripts\DamageZone.cs" />
     <Compile Include="Assets\Scripts\DeathEvent.cs" />
     <Compile Include="Assets\Scripts\Dove.cs" />

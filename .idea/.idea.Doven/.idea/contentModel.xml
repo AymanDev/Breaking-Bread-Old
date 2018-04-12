@@ -15,6 +15,7 @@
         <e p="Scripts" t="Include">
           <e p="BreadSpriteController.cs" t="Include" />
           <e p="CameraShake.cs" t="Include" />
+          <e p="ChangePhase.cs" t="Include" />
           <e p="DamageZone.cs" t="Include" />
           <e p="DeathEvent.cs" t="Include" />
           <e p="Dove.cs" t="Include" />

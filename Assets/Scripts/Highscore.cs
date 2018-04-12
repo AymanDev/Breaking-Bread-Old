@@ -24,6 +24,11 @@ public class Highscore : MonoBehaviour
         TouchScreenKeyboard.Open(inputField.text);
     }
 
+    public void Keyboard()
+    {
+        TouchScreenKeyboard.Open(inputField.text);
+    }
+
     public void ChangingField()
     {
         var wrongSymblos = inputField.text.IndexOfAny(
@@ -35,7 +40,6 @@ public class Highscore : MonoBehaviour
                                }) != -1;
         applyButton.GetComponent<Button>().interactable = inputField.text.Length > 3 && !wrongSymblos;
         wrongSymblosText.gameObject.SetActive(wrongSymblos);
-        Debug.Log("mem");
     }
 
     public void SetNickname()
