@@ -1,9 +1,6 @@
-# Doven3
+# Breaking Bread Old
 
 Old version of the game, which is called now: Breaking Bread and realesed on Google Play.
 
 Goal:
-- Port and improve for Android. (+)
-- Improve game mechanics. (+)
-- Make animations smooth and less buggy.
-- Make gameplay more interesting.
+Create working game in 48 hours. Created on TulaHack 2018 in Tula, Russia.
